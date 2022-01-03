@@ -1,7 +1,15 @@
-fun main(args: Array<String>) {
-    println("Hello World!")
+import java.io.File
 
-    // Try adding program arguments via Run/Debug configuration.
-    // Learn more about running applications: https://www.jetbrains.com/help/idea/running-applications.html.
-    println("Program arguments: ${args.joinToString()}")
+fun main(args: Array<String>) {
+    val chart = Chart(1000, 1000)
+    read("input.txt")
+        .map { Path.of(it) }
+        .forEach { chart.addPath(it) }
+
+    println("number of 2 or above: ${chart.countOccurrences { it >= 2 }}")
+
+
 }
+
+fun read(fileName: String): List<String> =
+    File(ClassLoader.getSystemResource(fileName).toURI()).readLines()
